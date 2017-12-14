@@ -5,7 +5,7 @@ password = "yourpassword"
 
 driver=webdriver.Chrome()
 driver.get('http://vip.jd.com')
-time.sleep(3)
+time.sleep(1)
 
 
 driver.find_element_by_link_text('账户登录').click()
@@ -16,3 +16,5 @@ driver.find_element_by_id('nloginpwd').send_keys(password)
 driver.find_element_by_id('loginsubmit').click()
 time.sleep(1)
 driver.find_element_by_class_name('icon-sign').click()
+
+driver.close()
