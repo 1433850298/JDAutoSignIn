@@ -1,8 +1,11 @@
 # written by Taylor Huang 
 import time
 from selenium import webdriver
+from datetime import date
+
 username = "yourusername"
 password = "yourpassword"
+
 
 driver=webdriver.Chrome()
 driver.get('http://vip.jd.com')
@@ -19,12 +22,18 @@ time.sleep(1)
 try:
     driver.find_element_by_id('signIn').click()  #签到领京豆
     print("签到成功！")
-    time.sleep(1)
-    driver.find_element_by_class_name('gift').click()  #领取礼包
-    driver.get("http://datawallet.jd.com/profile.html")
-    driver.find_element_by_class_name('btn-sign').click()  # 签到领流量
-    print("领取流量成功！")
-    driver.quit()  #若签到成功，关闭浏览器并安静退出
 except:
-    print("签到失败，请检查.")  #若签到失败，打印错误信息
-    driver.close()  #关闭浏览器，但保留命令行，提示用户检查错误的原因
+    print("签到失败，可能是重复签到了，请检查.")  # 若签到失败，打印错误信息
+
+time.sleep(1)
+
+if date.today().day == 5:
+    driver.find_element_by_class_name('gift').click()  #每月5号领取礼包
+    print('每月5号领取礼包！')
+
+
+driver.get("http://datawallet.jd.com/profile.html")
+driver.find_element_by_class_name('btn-sign').click()  # 签到领流量
+print("领取流量成功！")
+print('签到结束！')
+driver.quit()  #签到成功，关闭浏览器并安静退出
